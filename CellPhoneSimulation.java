@@ -251,5 +251,87 @@ public class CellPhoneSimulation{
    /*
     *   Converts Cell number into cluster number
     */
+    private static void SetUpChannelMatrix(Matrix inMatrix){
+        inMatrix.SetValue(0,0,0);   inMatrix.SetValue(1,0,0);   inMatrix.SetValue(2,0,0);
+        inMatrix.SetValue(0,1,0);   inMatrix.SetValue(1,1,0);   inMatrix.SetValue(2,1,0);
+        inMatrix.SetValue(0,2,0);   inMatrix.SetValue(1,2,0);   inMatrix.SetValue(2,2,0);
+        inMatrix.SetValue(0,3,0);   inMatrix.SetValue(1,3,0);   inMatrix.SetValue(2,3,0);
+        inMatrix.SetValue(0,4,0);   inMatrix.SetValue(1,4,0);   inMatrix.SetValue(2,4,0);
+        inMatrix.SetValue(0,5,0);   inMatrix.SetValue(1,5,0);   inMatrix.SetValue(2,5,0);
+        inMatrix.SetValue(0,6,0);   inMatrix.SetValue(1,6,0);   inMatrix.SetValue(2,6,0);
+        inMatrix.SetValue(0,7,0);   inMatrix.SetValue(1,7,0);   inMatrix.SetValue(2,7,0);
+    }
 
+   /*
+        Distance Matrix will look like this
+            1       2       3       4       5       6       7       8       9
+        1  0        2000    2000    4000    6000    4000    4000    6000    6000
+        2  2000     0       2000    2000    4000    2000    4000    4000    6000
+        3  2000     2000    0       4000    4000    2000    2000    4000    4000
+        4  4000     2000    4000    0       2000    2000    4000    4000    6000
+        5  6000     4000    4000    2000    0       2000    4000    2000    4000
+        6  4000     2000    2000    2000    2000    0       2000    2000    4000
+        7  4000     4000    2000    4000    4000    2000    0       2000    2000
+        8  6000     4000    4000    4000    2000    2000    2000    0       2000
+        9  6000     6000    4000    6000    4000    4000    2000    2000    0
+
+    */
+
+    private static void SetUpDistanceMatrix(Matrix inMatrix){
+        // first row                        second row
+        inMatrix.SetValue(0,0,0);           inMatrix.SetValue(1,0,2000);
+        inMatrix.SetValue(0,1,2000);        inMatrix.SetValue(1,1,0);
+        inMatrix.SetValue(0, 2, 2000);      inMatrix.SetValue(1, 2, 2000);
+        inMatrix.SetValue(0, 3, 4000);      inMatrix.SetValue(1, 3, 2000);
+        inMatrix.SetValue(0, 4, 6000);      inMatrix.SetValue(1, 4, 4000);
+        inMatrix.SetValue(0, 5, 4000);      inMatrix.SetValue(1, 5, 2000);
+        inMatrix.SetValue(0, 6, 4000);      inMatrix.SetValue(1, 6, 4000);
+        inMatrix.SetValue(0, 7, 6000);      inMatrix.SetValue(1, 7, 6000);
+        inMatrix.SetValue(0, 8, 6000);      inMatrix.SetValue(1, 8, 6000);
+
+        // third row                        fourth row
+        inMatrix.SetValue(2, 0, 2000);      inMatrix.SetValue(3, 0, 4000);
+        inMatrix.SetValue(2, 1, 2000);      inMatrix.SetValue(3, 1, 2000);
+        inMatrix.SetValue(2, 2, 0);         inMatrix.SetValue(3, 2, 4000);
+        inMatrix.SetValue(2, 3, 4000);      inMatrix.SetValue(3, 3, 0);
+        inMatrix.SetValue(2, 4, 4000);      inMatrix.SetValue(3, 4, 2000);
+        inMatrix.SetValue(2, 5, 2000);      inMatrix.SetValue(3, 5, 2000);
+        inMatrix.SetValue(2, 6, 4000);      inMatrix.SetValue(3, 6, 4000);
+        inMatrix.SetValue(2, 7, 4000);      inMatrix.SetValue(3, 7, 4000);
+        inMatrix.SetValue(2, 8, 6000);      inMatrix.SetValue(3, 8, 6000);
+
+        // fifth row                        sixth row
+        inMatrix.SetValue(4, 0, 6000);      inMatrix.SetValue(5, 0, 4000);
+        inMatrix.SetValue(4, 1, 4000);      inMatrix.SetValue(5, 1, 2000);
+        inMatrix.SetValue(4, 2, 4000);      inMatrix.SetValue(5, 2, 2000);
+        inMatrix.SetValue(4, 3, 2000);      inMatrix.SetValue(5, 3, 2000);
+        inMatrix.SetValue(4, 4, 0);         inMatrix.SetValue(5, 4, 2000);
+        inMatrix.SetValue(4, 5, 2000);      inMatrix.SetValue(5, 5, 0);
+        inMatrix.SetValue(4, 6, 4000);      inMatrix.SetValue(5, 6, 2000);
+        inMatrix.SetValue(4, 7, 2000);      inMatrix.SetValue(5, 7, 2000);
+        inMatrix.SetValue(4, 8, 4000);      inMatrix.SetValue(5, 8, 4000);
+
+        // seventh row                      eight row
+        inMatrix.SetValue(6, 0, 4000);      inMatrix.SetValue(7, 0, 6000);
+        inMatrix.SetValue(6, 1, 4000);      inMatrix.SetValue(7, 1, 6000);
+        inMatrix.SetValue(6, 2, 2000);      inMatrix.SetValue(7, 2, 4000);
+        inMatrix.SetValue(6, 3, 4000);      inMatrix.SetValue(7, 3, 6000);
+        inMatrix.SetValue(6, 4, 4000);      inMatrix.SetValue(7, 4, 4000);
+        inMatrix.SetValue(6, 5, 2000);      inMatrix.SetValue(7, 5, 4000);
+        inMatrix.SetValue(6, 6, 0);         inMatrix.SetValue(7, 6, 2000);
+        inMatrix.SetValue(6, 7, 2000);      inMatrix.SetValue(7, 7, 0);
+        inMatrix.SetValue(6, 8, 2000);      inMatrix.SetValue(7, 8, 2000);
+
+        // ninth row
+        inMatrix.SetValue(8, 0, 6000);
+        inMatrix.SetValue(8, 1, 6000);
+        inMatrix.SetValue(8, 2, 4000);
+        inMatrix.SetValue(8, 3, 6000);
+        inMatrix.SetValue(8, 4, 4000);
+        inMatrix.SetValue(8, 5, 4000);
+        inMatrix.SetValue(8, 6, 2000);
+        inMatrix.SetValue(8, 7, 2000);
+        inMatrix.SetValue(8, 8, 0);
+    }
 }
+
