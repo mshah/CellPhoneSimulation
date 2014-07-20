@@ -335,3 +335,22 @@ public class CellPhoneSimulation{
     }
 }
 
+class EventCompare implements Comparator<Event>{
+
+    // comparator interface requires defining compare method
+    public int compare(Event event1, Event event2){
+        int posResult = 1;
+        int negResult = -1;
+        int zerResult = 0;
+
+        // first on time
+        int nTime1 = event1.GetTime();
+        int nTime2 = event2.GetTime();
+        if (nTime1 < nTime2){
+            return negResult;
+        }else if (nTime1 >= nTime2){
+            return posResult;
+        }
+        return zerResult;
+    }
+}
